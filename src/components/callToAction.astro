@@ -1,0 +1,95 @@
+---
+import Button from "./button.astro";
+---
+
+<section class="cta">
+  <div class="cta__content">
+    <span class="cta__eyebrow">HAGAMOS ALGO EXTRAORDINARIO</span>
+
+    <h2>
+      ¿Tienes una idea?
+      <span>Hagámosla realidad.</span>
+    </h2>
+
+    <p>
+      Cada gran solución comienza con una idea.
+      En Master Soft Design combinamos diseño, tecnología e innovación
+      para convertirlas en experiencias y soluciones digitales.
+    </p>
+
+    <div class="cta__actions">
+      <Button
+        text="Hablemos de tu proyecto"
+        href="/contacto"
+        variant="primary"
+      />
+
+      <Button
+        text="Explora nuestros servicios"
+        href="/servicios"
+        variant="outline"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    display: flex;
+    justify-content: center;
+    padding-block: var(--space-16);
+    background: var(--color-background);
+  }
+
+  .cta__content {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-8);
+    max-width: 750px;
+    width: 100%;
+    }
+
+  .cta__eyebrow {
+    color: var(--color-secondary);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .cta h2 {
+    text-align: center;
+    color: var(--color-primary);
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    line-height: 1.15;
+  }
+
+  .cta h2 span {
+    display: block;
+    color: var(--color-secondary);
+  }
+
+  .cta p {
+    color: var(--color-text);
+    line-height: 1.8;
+    max-width: 650px;
+  }
+
+  .cta__actions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: var(--space-4);
+  }
+  .cta__eyebrow,
+    .cta p {
+    text-align: left;
+    }
+
+  @media (max-width: 600px) {
+    .cta__actions {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+</style>

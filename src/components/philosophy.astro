@@ -1,0 +1,90 @@
+---
+import SectionHeading from "./sectionHeading.astro";
+
+const principles = [
+  {
+    number: "01",
+    title: "Diseño con propósito",
+    description:
+      "Cada decisión de diseño responde a una necesidad real. Creamos experiencias digitales centradas en las personas."
+  },
+  {
+    number: "02",
+    title: "Tecnología adaptable",
+    description:
+      "Desarrollamos soluciones flexibles, capaces de ajustarse a los cambios y necesidades de cada proyecto."
+  },
+  {
+    number: "03",
+    title: "Longevidad digital",
+    description:
+      "Pensamos más allá del lanzamiento. Construimos productos que puedan mantenerse, evolucionar y conservar su valor."
+  }
+];
+---
+
+<section class="philosophy">
+  <div class="philosophy__header">
+    <SectionHeading
+      eyebrow="NUESTRA FILOSOFÍA"
+      title="La tecnología debe evolucionar con las personas."
+      description="Creemos que las mejores soluciones digitales no solo funcionan hoy, sino que están preparadas para el futuro."
+    />
+  </div>
+
+  <div class="philosophy__grid">
+    {principles.map((principle) => (
+      <article class="philosophy__item">
+        <span class="philosophy__number">{principle.number}</span>
+
+        <h3>{principle.title}</h3>
+
+        <p>{principle.description}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .philosophy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    padding-block: var(--space-16);
+  }
+
+  .philosophy__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+
+  .philosophy__item {
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+
+  .philosophy__number {
+    color: var(--color-secondary);
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  .philosophy__item h3 {
+    margin-block: var(--space-4);
+    color: var(--color-primary);
+  }
+
+  .philosophy__item p {
+    color: var(--color-text);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 768px) {
+    .philosophy__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

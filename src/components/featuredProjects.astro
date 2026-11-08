@@ -1,0 +1,174 @@
+---
+import SectionHeading from "./sectionHeading.astro";
+import Button from "./button.astro";
+
+const projects = [
+  {
+    name: "Proyecto destacado 01",
+    category: "Desarrollo web",
+    description:
+      "Experiencias digitales diseñadas para ofrecer soluciones funcionales y atractivas.",
+    technologies: ["Astro", "TypeScript", "CSS"],
+    image: "/images/projects/project-01.webp",
+    href: "#"
+  },
+  {
+    name: "Proyecto destacado 02",
+    category: "Diseño UI/UX",
+    description:
+      "Interfaces intuitivas que conectan las necesidades de las personas con la tecnología.",
+    technologies: ["Figma", "UI Design", "UX"],
+    image: "/images/projects/project-02.webp",
+    href: "#"
+  },
+  {
+    name: "Proyecto destacado 03",
+    category: "Desarrollo de software",
+    description:
+      "Soluciones digitales creadas para resolver problemas y optimizar procesos.",
+    technologies: ["JavaScript", "Node.js", "MySQL"],
+    image: "/images/projects/project-03.webp",
+    href: "#"
+  }
+];
+---
+
+<section class="featured-projects">
+  <SectionHeading
+    eyebrow="NUESTRO TRABAJO"
+    title="Ideas que toman forma."
+    description="Explora algunos de los proyectos y soluciones digitales que representan nuestra visión."
+  />
+
+  <div class="featured-projects__grid">
+    {projects.map((project) => (
+      <article class="project-card">
+        <div class="project-card__image">
+          <img src={project.image} alt={`Vista previa de ${project.name}`} loading="lazy" />
+        </div>
+
+        <div class="project-card__content">
+          <span class="project-card__category">{project.category}</span>
+
+          <h3>{project.name}</h3>
+
+          <p>{project.description}</p>
+
+          <div class="project-card__technologies">
+            {project.technologies.map((technology) => (
+              <span>{technology}</span>
+            ))}
+          </div>
+
+          <a href={project.href} class="project-card__link">
+            Conocer proyecto →
+          </a>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <div class="featured-projects__action">
+    <Button
+      text="Explorar proyectos"
+      href="/proyectos"
+      variant="outline"
+    />
+  </div>
+</section>
+
+<style>
+  .featured-projects {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    padding-block: var(--space-16);
+  }
+
+  .featured-projects__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+
+  .project-card {
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+
+  .project-card__image {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--color-border);
+  }
+
+  .project-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .project-card:hover .project-card__image img {
+    transform: scale(1.04);
+  }
+
+  .project-card__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+    padding: var(--space-6);
+  }
+
+  .project-card__category {
+    color: var(--color-secondary);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .project-card h3 {
+    color: var(--color-primary);
+  }
+
+  .project-card p {
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  .project-card__technologies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .project-card__technologies span {
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+    background: var(--color-background);
+    font-size: 0.8rem;
+  }
+
+  .project-card__link {
+    color: var(--color-secondary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .project-card__link:hover {
+    text-decoration: underline;
+  }
+
+  .featured-projects__action {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  @media (max-width: 768px) {
+    .featured-projects__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

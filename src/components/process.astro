@@ -1,0 +1,118 @@
+---
+import SectionHeading from "./sectionHeading.astro";
+
+const steps = [
+  {
+    number: "01",
+    title: "Descubrimiento",
+    description:
+      "Conocemos tus necesidades, objetivos y desafíos para comprender qué solución necesita tu proyecto."
+  },
+  {
+    number: "02",
+    title: "Planificación",
+    description:
+      "Definimos la estrategia, estructura, tecnologías y prioridades que guiarán el desarrollo."
+  },
+  {
+    number: "03",
+    title: "Diseño y desarrollo",
+    description:
+      "Transformamos las ideas en soluciones digitales funcionales, intuitivas y adaptables."
+  },
+  {
+    number: "04",
+    title: "Evolución",
+    description:
+      "Evaluamos, optimizamos y mejoramos las soluciones para acompañar su crecimiento."
+  }
+];
+---
+
+<section class="process">
+  <SectionHeading
+    eyebrow="CÓMO TRABAJAMOS"
+    title="De la idea a la solución."
+    description="Seguimos un proceso estructurado que nos permite transformar necesidades en experiencias digitales."
+  />
+
+  <div class="process__grid">
+    {steps.map((step) => (
+      <article class="process__item">
+        <span class="process__number">{step.number}</span>
+
+        <div class="process__line"></div>
+
+        <h3>{step.title}</h3>
+
+        <p>{step.description}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .process {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+    padding-block: var(--space-16);
+  }
+
+  .process__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: var(--space-12);
+    row-gap: var(--space-8);
+  }
+
+  .process__item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+
+  .process__number {
+    color: var(--color-secondary);
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .process__line {
+    width: 100%;
+    height: 2px;
+    background: var(--color-border);
+    position: relative;
+  }
+
+  .process__line::before {
+    content: "";
+    position: absolute;
+    width: 60%;
+    height: 2px;
+    background: var(--color-secondary);
+  }
+
+  .process__item h3 {
+    color: var(--color-primary);
+  }
+
+  .process__item p {
+    color: var(--color-text);
+    line-height: 1.7;
+  }
+
+  .process__step {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    }
+
+  @media (max-width: 768px) {
+    .process__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+  }
+</style>

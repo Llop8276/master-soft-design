@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" fill="none">
+  <defs>
+    <linearGradient id="blueWave" x1="80" y1="480" x2="1120" y2="180" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#67B8FF" stop-opacity=".10"/>
+      <stop offset=".48" stop-color="#4D9CFF" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#8B7BFA" stop-opacity=".28"/>
+    </linearGradient>
+    <linearGradient id="violetWave" x1="250" y1="570" x2="1190" y2="260" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#72B8FF" stop-opacity=".08"/>
+      <stop offset=".52" stop-color="#8A83F2" stop-opacity=".20"/>
+      <stop offset="1" stop-color="#B47AF5" stop-opacity=".30"/>
+    </linearGradient>
+    <linearGradient id="highlight" x1="300" y1="430" x2="1100" y2="220" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset=".55" stop-color="#FFFFFF" stop-opacity=".20"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity=".02"/>
+    </linearGradient>
+  </defs>
+  <path d="M0 520 C230 440 430 390 620 330 C825 265 1015 175 1200 85 L1200 600 L0 600 Z" fill="url(#blueWave)"/>
+  <path d="M120 600 C340 500 520 445 710 385 C900 325 1055 260 1200 205 L1200 600 Z" fill="url(#violetWave)"/>
+  <path d="M0 520 C230 440 430 390 620 330 C825 265 1015 175 1200 85" stroke="url(#highlight)" stroke-width="3"/>
+</svg>

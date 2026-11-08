@@ -1,0 +1,218 @@
+---
+const navigation = [
+  { label: "Empresa", href: "/empresa" },
+  { label: "Servicios", href: "/servicios" },
+  { label: "Proyectos", href: "/proyectos" },
+  { label: "Plantillas", href: "/plantillas" },
+  { label: "Contacto", href: "/contacto" },
+];
+---
+
+<header class="navbar">
+  <nav class="navbar__container" aria-label="Navegación principal">
+
+    <a href="/" class="navbar__logo" aria-label="MSD — Inicio">
+      <img
+        src="/images/MSD_Logo_Largo.png"
+        alt="Master Soft Design"
+        class="navbar__logo-image"
+      />
+    </a>
+
+    <button
+      class="navbar__toggle"
+      type="button"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="navbar-menu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="navbar__links" id="navbar-menu">
+      {
+        navigation.map((item) => (
+          <li>
+            <a href={item.href}>{item.label}</a>
+          </li>
+        ))
+      }
+    </ul>
+
+  </nav>
+</header>
+
+<style>
+  /* NAVBAR */
+
+  .navbar {
+    width: 100%;
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .navbar__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: var(--space-4) var(--space-6);
+  }
+
+  /* LOGO */
+
+  .navbar__logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .navbar__logo-image {
+    display: block;
+    width: 280px;
+    height: 72px;
+    object-fit: contain;
+  }
+
+  @media (max-width: 768px) {
+  .navbar__logo-image {
+    width: 200px;
+    height: 60px;
+  }
+}
+
+  /* NAVIGATION */
+
+  .navbar__links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .navbar__links a {
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    text-decoration: none;
+
+    transition: color var(--transition-fast);
+  }
+
+  .navbar__links a:hover {
+    color: var(--color-secondary);
+  }
+
+  /* MOBILE BUTTON */
+
+  .navbar__toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .navbar__toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--color-primary);
+  }
+
+  /* RESPONSIVE */
+
+  @media (max-width: 768px) {
+    .navbar__container {
+      position: relative;
+    }
+
+    .navbar__toggle {
+      display: flex;
+    }
+
+    .navbar__links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      z-index: 10;
+
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+
+      padding: var(--space-2) var(--space-4);
+
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .navbar__links.is-open {
+      display: flex;
+    }
+
+    .navbar__links a {
+      display: block;
+      padding: var(--space-4);
+      font-size: var(--font-size-base);
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>(
+    ".navbar__toggle"
+  );
+
+  const menu = document.querySelector<HTMLUListElement>(
+    "#navbar-menu"
+  );
+
+  if (toggle && menu) {
+    const closeMenu = () => {
+      menu.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Abrir menú");
+    };
+
+    toggle.addEventListener("click", () => {
+      const isOpen = menu.classList.toggle("is-open");
+
+      toggle.setAttribute("aria-expanded", String(isOpen));
+      toggle.setAttribute(
+        "aria-label",
+        isOpen ? "Cerrar menú" : "Abrir menú"
+      );
+    });
+
+    // Cerrar al seleccionar una opción
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    // Cerrar con Escape
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+    });
+  }
+</script>

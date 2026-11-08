@@ -1,11 +1,317 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/button.astro";
+import SectionHeading from "../components/sectionHeading.astro";
+import Card from "../components/card.astro";
+import Philosophy from "../components/philosophy.astro";
+import Adaptability from "../components/adaptability.astro";
+import Process from "../components/process.astro";
+import CallToAction from "../components/callToAction.astro";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout
+  title="Master Soft Design | Diseño y tecnología"
+  description="Creamos soluciones digitales que evolucionan junto a las personas y los negocios."
+>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__inner">
+  
+      <div class="hero__content">
+        <span class="hero__eyebrow">
+          MASTER SOFT DESIGN
+        </span>
+  
+        <h1>
+          Diseñamos tecnología
+          <span>con propósito.</span>
+        </h1>
+  
+        <p>
+          Creamos experiencias y soluciones digitales que conectan
+          diseño, tecnología e innovación para construir un futuro mejor.
+        </p>
+  
+        <div class="hero__actions">
+          <Button
+            text="Conoce nuestros servicios"
+            href="/servicios"
+            variant="primary"
+          />
+  
+          <Button
+            text="Conoce MSD"
+            href="/empresa"
+            variant="outline"
+          />
+        </div>
+      </div>
+  
+      <div class="hero__visual" aria-hidden="true">
+        <div class="hero__glow"></div>
+        <img
+          src="/images/hero-waves.svg"
+          alt=""
+          class="hero__waves"
+        />
+        <img
+          src="/images/msd-isotipo.png"
+          alt=""
+          class="hero__symbol"
+        />
+      </div>
+  
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="services">
+    <SectionHeading
+      eyebrow="QUÉ HACEMOS"
+      title="Transformamos ideas en soluciones digitales."
+      description="Combinamos creatividad, diseño y desarrollo para crear productos y experiencias digitales."
+    />
+  
+    <div class="services-grid">
+      <Card
+        title="Desarrollo web"
+        description="Creamos experiencias digitales adaptables a las necesidades de cada proyecto."
+        href="/services/web"
+      />
+  
+      <Card
+        title="Desarrollo de software"
+        description="Diseñamos soluciones digitales que responden a problemas reales."
+        href="/services/software"
+      />
+  
+      <Card
+        title="Diseño UI/UX"
+        description="Diseñamos interfaces intuitivas centradas en las necesidades de las personas."
+      />
+  
+      <Card
+        title="Adaptabilidad y longevidad"
+        description="Creamos soluciones digitales capaces de evolucionar."
+      >
+        <span>Principios de MSD</span>
+        <p>Diseñamos pensando en el futuro.</p>
+      </Card>
+    </div>
+  </section>
+  <Philosophy />
+  <Adaptability />
+  <Process />
+  <CallToAction />
+</BaseLayout>
+
+<style>
+  /* HERO */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  background: var(--color-background);
+}
+
+.hero__inner {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-6);
+}
+
+.hero__eyebrow {
+  color: var(--color-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.hero h1 {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+
+  color: var(--color-primary);
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.hero h1 span {
+  display: block;
+  color: var(--color-secondary);
+}
+
+.hero__content > p {
+  max-width: 700px;
+  color: var(--color-text);
+  font-size: var(--font-size-lg);
+  line-height: 1.7;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+/* ELEMENTO VISUAL */
+
+.hero__visual {
+  position: relative;
+  min-width: 0;
+  min-height: 520px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero__glow {
+  position: absolute;
+  inset: -20% -25% -15% -15%;
+
+  background:
+    radial-gradient(
+      ellipse at 65% 25%,
+      rgb(0 122 255 / 20%),
+      transparent 45%
+    ),
+    radial-gradient(
+      ellipse at 85% 65%,
+      rgb(147 51 234 / 24%),
+      transparent 48%
+    ),
+    radial-gradient(
+      ellipse at 45% 85%,
+      rgb(0 122 255 / 10%),
+      transparent 50%
+    );
+
+  filter: blur(40px);
+}
+
+.hero__symbol {
+  position: relative;
+  z-index: 1;
+
+  width: 135%;
+  max-width: 700px;
+  height: auto;
+
+  object-fit: contain;
+  transform: translateX(10px);
+}
+.hero__waves {
+  position: absolute;
+  z-index: 0;
+
+  width: 190%;
+  max-width: none;
+  height: auto;
+
+  bottom: -15%;
+  right: -40%;
+
+  pointer-events: none;
+}
+
+/* TABLET */
+
+@media (max-width: 900px) {
+  .hero__inner {
+    grid-template-columns: 1fr 0.7fr;
+    gap: var(--space-4);
+  }
+
+  .hero__visual {
+    min-height: 300px;
+  }
+
+  .hero__symbol {
+    width: 130%;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: auto;
+  }
+
+  .hero__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__content {
+    gap: var(--space-6);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 10vw, 3.5rem);
+  }
+
+  .hero__visual {
+    min-height: 220px;
+    margin-top: var(--space-4);
+  }
+
+  .hero__symbol {
+    width: 95%;
+    max-width: 300px;
+  }
+
+  .hero__waves {
+    width: 155%;
+    right: -28%;
+    bottom: -25%;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+
+
+  /* SERVICES */
+
+  .services {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+
+  @media (max-width: 768px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
