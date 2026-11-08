@@ -1,4 +1,6 @@
 :root {
+  color-scheme: light;
+
   /* PRIMARY COLORS */
   --color-primary: #16324f;
   --color-primary-hover: #10263c;
@@ -49,4 +51,24 @@
   /* TRANSITIONS */
   --transition-fast: 150ms ease;
   --transition-normal: 250ms ease;
+}
+
+/* DARK MODE */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-primary: #8db9e8;
+  --color-primary-hover: #a6caf0;
+
+  --color-secondary: #55c5c0;
+  --color-secondary-hover: #72d5d0;
+
+  --color-background: #101820;
+  --color-surface: #1c2935;
+  --color-border: #344451;
+  --color-text: #f2f5f7;
+
+  --color-success: #65c994;
+  --color-warning: #f4b875;
+  --color-error: #ff7770;
 }

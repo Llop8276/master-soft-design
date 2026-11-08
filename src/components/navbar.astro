@@ -11,14 +11,26 @@ const navigation = [
 <header class="navbar">
   <nav class="navbar__container" aria-label="Navegación principal">
 
+    <!-- LOGO -->
     <a href="/" class="navbar__logo" aria-label="MSD — Inicio">
+
+      <!-- Logo para modo claro -->
       <img
         src="/images/MSD_Logo_Largo.png"
         alt="Master Soft Design"
-        class="navbar__logo-image"
+        class="navbar__logo-image logo-light"
       />
+    
+      <!-- Logo para modo oscuro -->
+      <img
+        src="/images/MSD_logo_dark_transparent.png"
+        alt="Master Soft Design"
+        class="navbar__logo-image logo-dark"
+      />
+    
     </a>
 
+    <!-- BOTÓN MENÚ MÓVIL -->
     <button
       class="navbar__toggle"
       type="button"
@@ -31,6 +43,7 @@ const navigation = [
       <span></span>
     </button>
 
+    <!-- NAVEGACIÓN -->
     <ul class="navbar__links" id="navbar-menu">
       {
         navigation.map((item) => (
@@ -39,18 +52,75 @@ const navigation = [
           </li>
         ))
       }
+
+      <!-- SELECTOR DE TEMA -->
+      <li class="navbar__theme-item">
+
+        <button
+          class="theme-trigger"
+          id="theme-trigger"
+          type="button"
+          aria-label="Cambiar apariencia"
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-controls="theme-menu"
+        >
+          <span id="theme-icon" aria-hidden="true">◐</span>
+          <span class="theme-trigger__arrow" aria-hidden="true">+</span>
+        </button>
+
+        <div class="theme-menu" id="theme-menu" hidden>
+
+          <button
+            type="button"
+            data-theme-option="light"
+            aria-label="Tema claro"
+            aria-checked="false"
+            role="menuitemradio"
+          >
+            <span aria-hidden="true">☀</span>
+          </button>
+
+          <button
+            type="button"
+            data-theme-option="dark"
+            aria-label="Tema oscuro"
+            aria-checked="false"
+            role="menuitemradio"
+          >
+            <span aria-hidden="true">☾</span>
+          </button>
+
+          <button
+            type="button"
+            data-theme-option="system"
+            aria-label="Tema automático"
+            aria-checked="false"
+            role="menuitemradio"
+          >
+            <span aria-hidden="true">◐</span>
+          </button>
+
+        </div>
+      </li>
     </ul>
 
   </nav>
 </header>
 
 <style>
+
   /* NAVBAR */
 
   .navbar {
     width: 100%;
     background-color: var(--color-surface);
+    color: var(--color-text);
     border-bottom: 1px solid var(--color-border);
+
+    transition:
+      background-color var(--transition-normal),
+      border-color var(--transition-normal);
   }
 
   .navbar__container {
@@ -62,6 +132,7 @@ const navigation = [
     margin-inline: auto;
     padding: var(--space-4) var(--space-6);
   }
+
 
   /* LOGO */
 
@@ -75,18 +146,31 @@ const navigation = [
   .navbar__logo-image {
     display: block;
     width: 280px;
-    height: 72px;
+    height: auto;
+    max-height: 85px;
     object-fit: contain;
   }
 
-  @media (max-width: 768px) {
-  .navbar__logo-image {
-    width: 200px;
-    height: 60px;
+  /* Logo para tema claro */
+  .logo-light {
+    display: block;
   }
-}
 
-  /* NAVIGATION */
+  .logo-dark {
+    display: none;
+  }
+
+  /* Logo para tema oscuro */
+  :global(html[data-theme="dark"]) .logo-light {
+    display: none;
+  }
+
+  :global(html[data-theme="dark"]) .logo-dark {
+    display: block;
+  }
+
+
+  /* NAVEGACIÓN */
 
   .navbar__links {
     display: flex;
@@ -111,7 +195,132 @@ const navigation = [
     color: var(--color-secondary);
   }
 
-  /* MOBILE BUTTON */
+
+  /* SELECTOR DE TEMA */
+
+  .navbar__theme-item {
+    position: relative;
+  }
+
+  /* Botón principal */
+
+  .theme-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    width: 48px;
+    height: 40px;
+    padding: 5px;
+
+    color: var(--color-text);
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+
+    transition:
+      background-color var(--transition-fast),
+      border-color var(--transition-fast);
+  }
+
+  .theme-trigger:hover,
+  .theme-trigger[aria-expanded="true"] {
+    background: var(--color-background);
+    border-color: var(--color-secondary);
+  }
+
+  .theme-trigger > span:first-child {
+    font-size: 1rem;
+    color: var(--color-secondary);
+  }
+
+  .theme-trigger__arrow {
+    font-size: 11px;
+    transition: transform var(--transition-fast);
+  }
+
+  .theme-trigger[aria-expanded="true"] .theme-trigger__arrow {
+    transform: rotate(45deg);
+  }
+
+
+  /* Menú desplegable */
+
+  .theme-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 20;
+
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    width: 76px;
+    padding: 5px;
+
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+
+    box-shadow: 0 8px 25px rgb(0 0 0 / 12%);
+  }
+
+  .theme-menu[hidden] {
+    display: none;
+  }
+
+  /* Opciones */
+
+  .theme-menu button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 36px;
+    padding: 5px;
+
+    color: var(--color-text);
+    background: transparent;
+    border: 0;
+    border-radius: var(--radius-md);
+
+    cursor: pointer;
+
+    transition:
+      background-color var(--transition-fast);
+  }
+
+  .theme-menu button:hover {
+    background: var(--color-background);
+  }
+
+  .theme-menu button[aria-checked="true"] {
+    background: var(--color-background);
+    outline: 1px solid var(--color-border);
+  }
+
+  .theme-menu button > span:first-child {
+    color: var(--color-secondary);
+    font-size: 1rem;
+  }
+
+  /* Accesibilidad: navegación con teclado */
+
+  .theme-trigger:focus-visible,
+  .theme-menu button:focus-visible {
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 2px;
+  }
+
+
+  /* BOTÓN MENÚ MÓVIL */
 
   .navbar__toggle {
     display: none;
@@ -136,9 +345,16 @@ const navigation = [
     background: var(--color-primary);
   }
 
+
   /* RESPONSIVE */
 
   @media (max-width: 768px) {
+
+    .navbar__logo-image {
+      width: 200px;
+      height: 60px;
+    }
+
     .navbar__container {
       position: relative;
     }
@@ -174,10 +390,31 @@ const navigation = [
       padding: var(--space-4);
       font-size: var(--font-size-base);
     }
+
+    .navbar__theme-item {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: var(--space-2) var(--space-4);
+    }
+
+    .theme-trigger {
+      width: 48px;
+      height: 40px;
+    }
+
+    .theme-menu {
+      position: static;
+      width: 76px;
+      margin-top: var(--space-2);
+      box-shadow: none;
+    }
   }
 </style>
 
 <script>
+  // MENÚ MÓVIL
+
   const toggle = document.querySelector<HTMLButtonElement>(
     ".navbar__toggle"
   );
@@ -187,6 +424,7 @@ const navigation = [
   );
 
   if (toggle && menu) {
+
     const closeMenu = () => {
       menu.classList.remove("is-open");
       toggle.setAttribute("aria-expanded", "false");
@@ -194,25 +432,184 @@ const navigation = [
     };
 
     toggle.addEventListener("click", () => {
+
       const isOpen = menu.classList.toggle("is-open");
 
       toggle.setAttribute("aria-expanded", String(isOpen));
+
       toggle.setAttribute(
         "aria-label",
         isOpen ? "Cerrar menú" : "Abrir menú"
       );
     });
 
-    // Cerrar al seleccionar una opción
     menu.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", closeMenu);
     });
 
-    // Cerrar con Escape
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") {
         closeMenu();
       }
     });
   }
+
+
+  // SISTEMA DE TEMAS
+
+  const themeTrigger = document.querySelector<HTMLButtonElement>(
+    "#theme-trigger"
+  );
+
+  const themeMenu = document.querySelector<HTMLDivElement>(
+    "#theme-menu"
+  );
+
+  const themeIcon = document.querySelector<HTMLSpanElement>(
+    "#theme-icon"
+  );
+
+  const systemPreference = window.matchMedia(
+    "(prefers-color-scheme: dark)"
+  );
+
+  const icons = {
+    light: "☾",
+    dark: "☀",
+    system: "◐",
+  };
+
+  // Obtener preferencia guardada
+
+  const getSavedTheme = () => {
+
+    const saved = localStorage.getItem("msd-theme");
+
+    return saved === "light" || saved === "dark" || saved === "system"
+      ? saved
+      : "system";
+  };
+
+
+  // Aplicar tema
+
+  const applyTheme = (preference: string) => {
+
+    const theme =
+      preference === "system"
+        ? systemPreference.matches
+          ? "dark"
+          : "light"
+        : preference;
+
+    document.documentElement.dataset.theme = theme;
+
+    if (themeIcon) {
+      themeIcon.textContent =
+        icons[preference as keyof typeof icons];
+    }
+
+    themeMenu?.querySelectorAll<HTMLButtonElement>(
+      "[data-theme-option]"
+    ).forEach((button) => {
+
+      const selected =
+        button.dataset.themeOption === preference;
+
+      button.setAttribute(
+        "aria-checked",
+        String(selected)
+      );
+    });
+  };
+
+
+  // Cerrar menú de temas
+
+  const closeThemeMenu = () => {
+
+    themeMenu?.setAttribute("hidden", "");
+
+    themeTrigger?.setAttribute("aria-expanded", "false");
+  };
+
+
+  // Inicializar selector
+
+  if (themeTrigger && themeMenu) {
+
+    applyTheme(getSavedTheme());
+
+    themeTrigger.addEventListener("click", () => {
+
+      const isOpen =
+        themeTrigger.getAttribute("aria-expanded") === "true";
+
+      themeTrigger.setAttribute(
+        "aria-expanded",
+        String(!isOpen)
+      );
+
+      if (isOpen) {
+        closeThemeMenu();
+      } else {
+        themeMenu.removeAttribute("hidden");
+      }
+    });
+
+
+    // Seleccionar tema
+
+    themeMenu.querySelectorAll<HTMLButtonElement>(
+      "[data-theme-option]"
+    ).forEach((button) => {
+
+      button.addEventListener("click", () => {
+
+        const preference = button.dataset.themeOption!;
+
+        localStorage.setItem("msd-theme", preference);
+
+        applyTheme(preference);
+
+        closeThemeMenu();
+
+        themeTrigger.focus();
+      });
+    });
+
+
+    // Cerrar al hacer clic fuera
+
+    document.addEventListener("click", (event) => {
+
+      if (
+        !themeTrigger.contains(event.target as Node) &&
+        !themeMenu.contains(event.target as Node)
+      ) {
+        closeThemeMenu();
+      }
+    });
+
+
+    // Cerrar con Escape
+
+    document.addEventListener("keydown", (event) => {
+
+      if (event.key === "Escape") {
+        closeThemeMenu();
+        themeTrigger.focus();
+      }
+    });
+  }
+
+
+  // Detectar cambios en la apariencia del dispositivo
+
+  systemPreference.addEventListener("change", () => {
+
+    if (getSavedTheme() === "system") {
+      applyTheme("system");
+    }
+  });
 </script>
